@@ -5,3 +5,4 @@ Ruby/Railsの研修でPRを上げたり自習として作成したプログラ�
 .
 
 asdfasdfasdfasdf
+あsdflk；あsdflkじゃsd；lfkじゃsdf；lかjsdf；亜lskdjf；亜lsdkfj
