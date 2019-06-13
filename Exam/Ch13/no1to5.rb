@@ -10,17 +10,25 @@ puts "\n"
 # exam no.2
 
 a2 = a.collect { |i| i * 100 }
+a.collect! { |i| i * 100 }
 
-puts '問2.a2:'
+puts '問2-a:a2:'
 p a2
+
+puts '問2-b:a'
+p a
 puts "\n"
 
 # exam no.3
 
 a3 = a.select { |i| (i % 3).zero? }
+a.select! { |i| (i % 3).zero? }
 
-puts '問3.a3:'
+puts '問3-a:a3:'
 p a3
+
+puts '問3-b:a'
+p a
 puts "\n"
 
 # exam no.4
