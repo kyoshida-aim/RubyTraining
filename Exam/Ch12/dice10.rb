@@ -3,9 +3,9 @@
 require './dice.rb'
 
 def dice10
-  (1..10).each do |i|
-    printf("%d回目:%d\n", i, dice)
-  end
+  total = 0
+  10.times { total += dice }
+  total
 end
 
-dice10 if $PROGRAM_NAME == __FILE__
+puts format('出目の合計:%<total>d', total: dice10) if $PROGRAM_NAME == __FILE__

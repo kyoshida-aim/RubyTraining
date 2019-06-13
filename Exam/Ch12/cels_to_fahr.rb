@@ -6,6 +6,8 @@ end
 
 if $PROGRAM_NAME == __FILE__
   (1..100).each do |degrees|
-    printf("摂氏:%.2f度　華氏:%.2f度\n", degrees, cels_to_fahr(degrees))
+    puts format('摂氏:%<cels>.2f度　華氏:%<fahr>.2f度',
+                cels: degrees,
+                fahr: cels_to_fahr(degrees))
   end
 end

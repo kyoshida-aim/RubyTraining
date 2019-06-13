@@ -4,4 +4,4 @@ def dice
   Random.rand(1..6)
 end
 
-p dice if $PROGRAM_NAME == __FILE__
+puts format('出目:%<result>d', result: dice) if $PROGRAM_NAME == __FILE__
