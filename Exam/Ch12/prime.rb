@@ -2,8 +2,10 @@
 
 def prime?(num)
   return false if num <= 1
+  return false if (num % 2).zero?
 
-  (2...num).each do |divider|
+  last_index = Math.sqrt(num).to_i
+  3.step(last_index, 2) do |divider|
     return false if (num % divider).zero?
   end
 
