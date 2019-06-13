@@ -2,14 +2,14 @@
 
 def kan2num(str)
   result = 0
-  result += get_kan_digit(str, '千')
-  result += get_kan_digit(str, '百')
-  result += get_kan_digit(str, '十')
+  result += get_digit(str, '千')
+  result += get_digit(str, '百')
+  result += get_digit(str, '十')
   result += kan2int(str[-1]) if str[-1] != '十'
   result
 end
 
-def get_kan_digit(str, digit)
+def get_digit(str, digit)
   return 0 unless (index = str.index(digit))
 
   if index.zero? || digit?(str[index - 1])
@@ -40,4 +40,4 @@ def kan2int(str)
   str.tr('一二三四五六七八九', '123456789').to_i
 end
 
-puts kan2num('千百二十三')
+puts kan2num('千百二十')
