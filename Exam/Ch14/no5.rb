@@ -2,14 +2,14 @@
 
 def kan2num(str)
   result = 0
-  result += get_digit(str, '千')
-  result += get_digit(str, '百')
-  result += get_digit(str, '十')
+  result += get_digit_value(str, '千')
+  result += get_digit_value(str, '百')
+  result += get_digit_value(str, '十')
   result += kan2int(str[-1]) if str[-1] != '十'
   result
 end
 
-def get_digit(str, digit)
+def get_digit_value(str, digit)
   return 0 unless (index = str.index(digit))
 
   if index.zero? || digit?(str[index - 1])
