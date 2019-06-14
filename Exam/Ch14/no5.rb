@@ -5,7 +5,7 @@ def kan2num(str)
   result += get_digit_value(str, '千')
   result += get_digit_value(str, '百')
   result += get_digit_value(str, '十')
-  result += kan2int(str[-1]) if str[-1] != '十'
+  result += kan2int(str[-1]) unless digit?(str[-1])
   result
 end
 
