@@ -15,7 +15,7 @@ puts '問2'
 p ary
 
 # exam no.3
-ary.sort_by(&:downcase)
+ary.sort_by!(&:downcase)
 
 puts '問3'
 p ary
