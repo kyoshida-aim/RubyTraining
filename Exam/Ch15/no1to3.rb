@@ -22,4 +22,5 @@ puts "ハッシュのサイズ:#{wday.size}"
 puts ''
 
 # exam no.3
+puts '問3'
 wday.each { |k, v| puts "「#{k}」は#{v}のことです" }
