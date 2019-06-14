@@ -12,11 +12,12 @@ end
 def get_digit_value(str, digit)
   return 0 unless (index = str.index(digit))
 
+  in_front_of_digit = str[index - 1]
   # if there are no number|digit in front of digit
-  if index.zero? || digit?(str[index - 1])
+  if index.zero? || digit?(in_front_of_digit)
     digit2int(digit)
   else
-    kan2int(str[index - 1]) * digit2int(digit)
+    kan2int(in_front_of_digit) * digit2int(digit)
   end
 end
 
