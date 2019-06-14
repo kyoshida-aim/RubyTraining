@@ -3,27 +3,27 @@
 # exam no.1
 str = 'Ruby is an object oriented programming language'
 
-ary = str.split(' ')
+words = str.split(' ')
 
 puts '問1'
-p ary
+p words
 
 # exam no.2
-ary.sort!
+words.sort!
 
 puts '問2'
-p ary
+p words
 
 # exam no.3
-ary.sort_by!(&:downcase)
+words.sort_by!(&:downcase)
 
 puts '問3'
-p ary
+p words
 
 # exam no.4
-ary_single_char = str.split('')
+words_single_char = str.split('')
 
-ary_keys = ary_single_char.uniq.sort
+single_char_keys = words_single_char.uniq.sort
 
 puts '問4'
-ary_keys.each { |key| puts %("#{key}": #{'*' * ary_single_char.count(key)}) }
+single_char_keys.each { |key| puts %("#{key}": #{'*' * words_single_char.count(key)}) }
