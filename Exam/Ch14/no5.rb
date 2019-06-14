@@ -42,4 +42,15 @@ def kan2int(str)
   str.tr('一二三四五六七八九', '123456789').to_i
 end
 
-puts kan2num('千二十')
+if $PROGRAM_NAME == __FILE__
+  test_str = '千二十'
+  puts "#{test_str}: #{kan2num(test_str)}"
+  test_str = '五百五'
+  puts "#{test_str}: #{kan2num(test_str)}"
+  test_str = '百'
+  puts "#{test_str}: #{kan2num(test_str)}"
+  test_str = '一'
+  puts "#{test_str}: #{kan2num(test_str)}"
+  test_str = '九千九百九十九'
+  puts "#{test_str}: #{kan2num(test_str)}"
+end

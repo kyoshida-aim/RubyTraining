@@ -6,19 +6,19 @@ str = 'Ruby is an object oriented programming language'
 words = str.split(' ')
 
 puts '問1'
-p words
+p words, ''
 
 # exam no.2
 words.sort!
 
 puts '問2'
-p words
+p words, ''
 
 # exam no.3
 words.sort_by!(&:downcase)
 
 puts '問3'
-p words
+p words, ''
 
 # exam no.4
 words_chars = str.split('')
