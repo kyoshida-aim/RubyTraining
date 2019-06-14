@@ -12,6 +12,7 @@ end
 def get_digit_value(str, digit)
   return 0 unless (index = str.index(digit))
 
+  # if there are no number|digit in front of digit
   if index.zero? || digit?(str[index - 1])
     digit2int(digit)
   else
