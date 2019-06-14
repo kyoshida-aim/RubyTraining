@@ -6,5 +6,9 @@ end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]
   filename = ARGV[0]
-  puts "#{filename}の文字数:#{count_chars(filename)}"
+  begin
+    puts "#{filename}の文字数:#{count_chars(filename)}"
+  rescue Errno::ENOENT, Errno::EACCES
+    puts "ファイル[#{filename}]を開けません"
+  end
 end

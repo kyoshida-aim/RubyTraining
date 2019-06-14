@@ -6,5 +6,9 @@ end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]
   filename = ARGV[0]
-  puts "#{filename}の行数:#{count_lines(filename)}"
+  begin
+    puts "#{filename}の行数:#{count_lines(filename)}"
+  rescue Errno::ENOENT, Errno::EACCES
+    puts "ファイル[#{filename}]を開けません"
+  end
 end

@@ -12,5 +12,9 @@ if $PROGRAM_NAME == __FILE__ && ARGV[0]
   filename = ARGV[0]
   new_filename = create_path(filename, '_first_line')
   text = first_line(filename, save_at: new_filename)
-  puts "#{filename}の最初の一行だけ取得しました:#{new_filename}\n#{text}"
+  begin
+    puts "#{filename}の最初の一行だけ取得しました:#{new_filename}\n#{text}"
+  rescue Errno::ENOENT, Errno::EACCES
+    puts "ファイル[#{filename}]または#{new_filename}にアクセスできません"
+  end
 end
