@@ -2,10 +2,9 @@
 
 require_relative './create_path'
 
-def reverse_lines(filename)
+def reverse_lines(filename, save_at:)
   text = File.read(filename).split(/\n/).reverse
-  new_filename = create_path(filename, '_reverse')
-  File.open(new_filename, 'w') do |file|
+  File.open(save_at, 'w') do |file|
     text.each do |line|
       # puts will insert LF even if the string was the last line of it.
       line == text.last ? file.write(line) : file.puts(line)
@@ -16,6 +15,7 @@ end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]
   filename = ARGV[0]
-  puts "#{filename}の行を逆順に並び替えました:"
-  puts reverse_lines(filename)
+  new_filename = create_path(filename, '_reverse')
+  puts "#{filename}の行を逆順に並び替えました:#{new_filename}"
+  puts reverse_lines(filename, save_at: new_filename)
 end
