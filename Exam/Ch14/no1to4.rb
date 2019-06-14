@@ -21,9 +21,9 @@ puts '問3'
 p words
 
 # exam no.4
-words_single_char = str.split('')
+words_chars = str.split('')
 
-single_char_keys = words_single_char.uniq.sort
+char_keys = words_chars.uniq.sort
 
 puts '問4'
-single_char_keys.each { |key| puts %("#{key}": #{'*' * words_single_char.count(key)}) }
+char_keys.each { |key| puts %("#{key}": #{'*' * words_chars.count(key)}) }
