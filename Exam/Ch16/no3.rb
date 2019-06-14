@@ -10,6 +10,11 @@ def word_capitalize(word)
   result
 end
 
-p word_capitalize('in-reply-to')
-p word_capitalize('X-MAILER')
-p word_capitalize('asdalskdjfpwqoieruklajfzknzscxmfnv')
+word = 'in-reply-to'
+puts %(元の文字列:"#{word}": \n整形後:"#{word_capitalize(word)}")
+puts ''
+word = 'X-MAILER'
+puts %(元の文字列:"#{word}": \n整形後:"#{word_capitalize(word)}")
+puts ''
+word = 'asdalskdjfpwqoieruklajfzknzscxmfnv'
+puts %(元の文字列:"#{word}": \n整形後:"#{word_capitalize(word)}")
