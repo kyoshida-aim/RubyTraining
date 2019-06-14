@@ -7,4 +7,4 @@ def str2hash(str)
   Hash[*keys_and_val]
 end
 
-p str2hash("blue 青 white\t白\nred 赤 hoge ")
+p str2hash("blue 青 white\t白\nred 赤 hoge ") if $PROGRAM_NAME == __FILE__
