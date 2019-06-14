@@ -15,19 +15,16 @@ puts '問2'
 p ary
 
 # exam no.3
-ary.sort! { |a, b| a.downcase <=> b.downcase }
+ary.sort_by(&:downcase)
 
 puts '問3'
 p ary
 
 # exam no.4
-count_hash = {}
-str.each_char do |i|
-  count_hash[i] ||= ''
-  count_hash[i] += '*'
-end
+ary_single_char = str.split('')
 
-count_array = count_hash.to_a
-count_array.sort!
+ary_keys = ary_single_char.uniq
+ary_keys.sort!
+
 puts '問4'
-count_array.each { |item| puts %("#{item[0]}": #{item[1]}) }
+ary_keys.each { |key| puts %("#{key}": #{'*' * ary_single_char.count(key)}) }

@@ -40,4 +40,4 @@ def kan2int(str)
   str.tr('一二三四五六七八九', '123456789').to_i
 end
 
-puts kan2num('千百二十')
+puts kan2num('千二十')
