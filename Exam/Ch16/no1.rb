@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-address = 'kyoshida@aiming-inc.com'
+address = 'rubytraining@example.com'
 pattern = /(.+)(?:@)(.+)/
 pattern =~ address
 
