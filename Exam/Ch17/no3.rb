@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'txtfile2ary'
+require_relative './txtfile2ary'
 
 def tail(line_num, filename)
   raise '行数が負の値です' if line_num.negative?
