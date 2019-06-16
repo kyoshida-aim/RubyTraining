@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 require_relative './create_path'
-require_relative 'txtfile2ary'
+require_relative './txtfile2ary'
 
 def reverse_lines(filename, save_at:)
   text = txtfile2ary(filename)
   File.open(save_at, 'w') do |file|
     text.reverse_each do |line|
       # puts will insert LF even if the string was the last line of it.
-      line == text.last ? file.write(line) : file.puts(line)
+      line == text.first ? file.write(line) : file.puts(line)
     end
   end
-  text
+  File.read(save_at)
 end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]

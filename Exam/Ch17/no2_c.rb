@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require_relative './create_path'
-require_relative 'txtfile2ary'
+require_relative './txtfile2ary'
 
 def last_line(filename, save_at:)
   text = txtfile2ary(filename)
   File.write(save_at, text.last)
-  text
+  File.read(save_at)
 end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]
