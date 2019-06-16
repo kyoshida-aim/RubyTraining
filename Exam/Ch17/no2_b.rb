@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require_relative './create_path'
+require_relative 'txtfile2ary'
 
 def first_line(filename, save_at:)
-  text = File.read(filename).split(/\n/).first
-  File.write(save_at, text)
+  text = txtfile2ary(filename)
+  File.write(save_at, text.first)
   text
 end
 

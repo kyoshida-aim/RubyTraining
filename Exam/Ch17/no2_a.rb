@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 require_relative './create_path'
+require_relative 'txtfile2ary'
 
 def reverse_lines(filename, save_at:)
-  text = File.read(filename).split(/\n/).reverse
+  text = txtfile2ary(filename)
   File.open(save_at, 'w') do |file|
-    text.each do |line|
+    text.reverse_each do |line|
       # puts will insert LF even if the string was the last line of it.
       line == text.last ? file.write(line) : file.puts(line)
     end
