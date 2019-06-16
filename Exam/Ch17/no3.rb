@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'txtfile2ary'
+
 def tail(line_num, filename)
   raise '行数が負の値です' if line_num.negative?
 
-  text_ary = File.read(filename).split(/\n/)
+  text_ary = txtfile2ary(filename)
   raise '行数がファイルの行数を超えています' if line_num > text_ary.size
 
   index  = -line_num - 1
