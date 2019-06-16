@@ -2,15 +2,22 @@
 
 require_relative './create_uniq_path'
 
+# Investigate buffer usage using dummy file to write.
 class Investigate
   def initialize(filename)
     @filename = filename
     @result = []
     @previous_filesize = 0
+  end
+
+  def calculate
+    puts "#{@filename}のバッファ使用量："
     write
-    output
+    output_avg
     delete
   end
+
+  private
 
   def write
     File.open(@filename, 'w') do |file|
@@ -23,21 +30,14 @@ class Investigate
 
   def check_buffer(filesize)
     return unless filesize > @previous_filesize
+
     @result << filesize - @previous_filesize
     @previous_filesize = filesize
-  end
-
-  def output
-    output_each
-    output_avg
-  end
-
-  def output_each
-    @result.each_with_index { |byte, i| puts "#{i+1}回目: #{byte}byte使用" }
+    puts "#{@result.size}回目: #{@result.last}byte"
   end
 
   def output_avg
-    puts"バッファ平均:#{avg}"
+    puts "平均:#{avg}"
   end
 
   def avg
@@ -55,7 +55,8 @@ if $PROGRAM_NAME == __FILE__
   filename = create_uniq_path
   begin
     puts 'バッファ使用量を計算します'
-    Investigate.new(filename)
+    buffer = Investigate.new(filename)
+    buffer.calculate
   rescue Errno::ENOENT, Errno::EACCES
     puts "ファイル名[#{filename}]を開けません"
   rescue Interrupt
