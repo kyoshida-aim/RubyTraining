@@ -2,13 +2,14 @@
 
 require_relative './create_path'
 require_relative './txtfile2ary'
+require 'English'
 
 def reverse_lines(filename, save_at:)
-  text = txtfile2ary(filename)
+  text = txtfile2ary(filename).reverse
   File.open(save_at, 'w') do |file|
-    text.reverse_each do |line|
-      # puts will insert LF even if the string was the last line of it.
-      line == text.first ? file.write(line) : file.puts(line)
+    text.each do |line|
+      file.puts($RS) if Regexp.new($RS + '$') =~ line
+      file.write(line.sub($RS, ''))
     end
   end
   File.read(save_at)
