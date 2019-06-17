@@ -43,12 +43,14 @@ def get_size(path)
 end
 
 def number_to_human_size(bytes)
-  return "#{bytes} #{get_si(0)}" if bytes / 1024.0 < 0.5
+  binary_prefix = 1024.0
+  half_si_unit = 0.5
+  return "#{bytes} #{get_si(0)}" if bytes / binary_prefix < half_si_unit
 
   si_id = 0
-  while bytes / 1024.0 > 0.5
+  while bytes / binary_prefix > half_si_unit
     si_id += 1
-    bytes /= 1024.0
+    bytes /= binary_prefix
   end
   format('%<bytes>.2f %<si>s', bytes: bytes, si: get_si(si_id))
 end
