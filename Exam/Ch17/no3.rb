@@ -8,9 +8,7 @@ def tail(line_num, filename)
   text_ary = txtfile2ary(filename)
   raise '行数がファイルの行数を超えています' if line_num > text_ary.size
 
-  index  = -line_num - 1
-  length = line_num + 1
-  text_ary[index, length]
+  text_ary.last(line_num)
 end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0] && ARGV[1]
