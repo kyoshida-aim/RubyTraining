@@ -11,7 +11,7 @@ end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]
   filename = ARGV[0]
-  new_filename = create_path(filename, '_first_line')
+  new_filename = create_file(filename, '_first_line')
   text = first_line(filename, save_at: new_filename)
   begin
     puts "#{filename}の最初の一行だけ取得しました:#{new_filename}\n#{text}"

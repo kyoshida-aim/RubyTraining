@@ -11,7 +11,7 @@ end
 
 if $PROGRAM_NAME == __FILE__ && ARGV[0]
   filename = ARGV[0]
-  new_filename = create_path(filename, '_last_line')
+  new_filename = create_file(filename, '_last_line')
   text = last_line(filename, save_at: new_filename)
   begin
     puts "#{filename}の最後の一行だけ取得しました:#{new_filename}\n#{text}"
