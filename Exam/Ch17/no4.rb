@@ -63,7 +63,7 @@ if $PROGRAM_NAME == __FILE__
     buffer.calculate
   rescue Errno::ENOENT, Errno::EACCES
     puts "ファイル名[#{filename}]を開けません"
-  rescue Interrupt
+  ensure
     File.delete(filename)
   end
 end
