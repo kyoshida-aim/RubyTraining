@@ -11,7 +11,7 @@ class Investigate
   end
 
   def calculate
-    puts "#{@filename}のバッファ使用量："
+    puts '結果:'
     write
     output_avg
     delete
@@ -33,7 +33,11 @@ class Investigate
 
     @result << filesize - @previous_filesize
     @previous_filesize = filesize
-    puts "#{@result.size}回目: #{@result.last}byte"
+    printf(
+      '%<times>2d回目: %<byte>2dbyte',
+      times: @result.size, byte: @result.last
+    )
+    puts
   end
 
   def output_avg
@@ -54,7 +58,7 @@ end
 if $PROGRAM_NAME == __FILE__
   filename = create_uniq_path
   begin
-    puts 'バッファ使用量を計算します'
+    puts "#{filename}を作成してバッファ使用量を計算します"
     buffer = Investigate.new(filename)
     buffer.calculate
   rescue Errno::ENOENT, Errno::EACCES
