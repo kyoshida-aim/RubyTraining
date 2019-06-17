@@ -29,7 +29,7 @@ end
 
 def process_file(filename, indent)
   output_fileinfo(filename, indent)
-  puts convert_byte2str(get_size(filename))
+  puts number_to_human_size(get_size(filename))
 end
 
 def output_fileinfo(path, indent)
@@ -42,7 +42,7 @@ def get_size(path)
   File.stat(path).size
 end
 
-def convert_byte2str(bytes)
+def number_to_human_size(bytes)
   return "#{bytes} #{get_si(0)}" if bytes / 1024.0 < 0.5
 
   si_id = 0
