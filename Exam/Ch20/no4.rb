@@ -19,6 +19,8 @@ class Calender
     puts dates
   end
 
+  private
+
   def row_str_length
     weekday_name.length
   end
