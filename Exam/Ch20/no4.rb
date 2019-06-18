@@ -10,10 +10,6 @@ class Calender
   def initialize(month, year)
     @month = month
     @year = year
-    create
-  end
-
-  def create(year = @year, month = @month)
     @time = Date.new(year, month)
   end
 
