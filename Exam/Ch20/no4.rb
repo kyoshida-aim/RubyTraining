@@ -15,19 +15,19 @@ class Calender
 
   def show
     puts month_and_year
-    puts weeks
+    puts weekday_name
     puts dates
   end
 
-  def str_length
-    weeks.length
+  def row_str_length
+    weekday_name.length
   end
 
   def month_and_year
-    @time.strftime('%B %Y').center(str_length)
+    @time.strftime('%B %Y').center(row_str_length)
   end
 
-  def weeks
+  def weekday_name
     WDAY.join(' ')
   end
 
