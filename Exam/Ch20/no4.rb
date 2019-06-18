@@ -32,15 +32,15 @@ class Calender
   end
 
   def dates
-    result = '   ' * @time.wday
+    dates = '   ' * @time.wday
 
     upto = @time.next_month.prev_day
     (@time..upto).each do |date|
-      result += format('%3d', date.mday)
-      result += $RS if date.saturday?
+      dates += format('%3d', date.mday)
+      dates += $RS if date.saturday?
     end
 
-    result
+    dates
   end
 end
 
