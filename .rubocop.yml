@@ -1,2 +1,6 @@
 Layout/AlignHash:
   EnforcedColonStyle: table
+
+AllCops:
+  Exclude:
+    - '/Users/kyoshida/Desktop/training/RubyTraining/Tool/zip/*_original.rb'

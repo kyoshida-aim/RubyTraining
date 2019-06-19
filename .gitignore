@@ -1,4 +1,5 @@
 .vscode
+.rubocop.yml
 
 # Created by https://www.gitignore.io/api/ruby,rails,linux,macos,windows
 # Edit at https://www.gitignore.io/?templates=ruby,rails,linux,macos,windows
