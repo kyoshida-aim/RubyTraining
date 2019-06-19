@@ -1,17 +1,48 @@
 # frozen_string_literal: true
 
-def simple_scan(word, filename)
-  return unless File.exist?(filename)
+# this class will contain novel text for word counting
+class Novel
+  def initialize(filename)
+    raise Errno::ENOENT unless File.exist?(filename)
 
-  pattern = Regexp.new(word)
-  count = 0
-  File.open(filename).each_line do |line|
-    if pattern =~ line
-      line.scan(pattern) { count += 1 }
-      print(line.gsub(pattern) { |str| "<<#{str}>>" })
+    @matched_text = []
+    @filename = filename
+    @len = 5
+  end
+
+  def simple_scan(pattern)
+    return unless File.exist?(@filename)
+
+    @pattern = Regexp.new(pattern)
+    scan
+    output
+  end
+
+  private
+
+  def scan
+    @matched_text = []
+    File.open(@filename).each_line do |line|
+      next unless @pattern =~ line
+
+      line.scan(@pattern) do |s|
+        pre = $`
+        post = $'
+        @matched_text << "#{pre[-@len, @len]}<<#{s}>>#{post[0, @len]}"
+      end
     end
   end
-  puts "count: #{count}"
+
+  def output
+    puts @matched_text
+    puts "count: #{@matched_text.size}"
+  end
 end
 
-simple_scan(*ARGV) if $PROGRAM_NAME == __FILE__ && ARGV.size == 2
+if $PROGRAM_NAME == __FILE__ && ARGV.size == 2
+  pattern = ARGV[0]
+  filename = ARGV[1]
+
+  novel = Novel.new(filename)
+  puts novel.simple_scan(pattern)
+end
