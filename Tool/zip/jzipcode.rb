@@ -60,7 +60,6 @@ class JZipCode
       end
       db.execute('COMMIT TRANSACTION')
     end
-    true
   end
 
   def each_line_in_csv(zipfile)
