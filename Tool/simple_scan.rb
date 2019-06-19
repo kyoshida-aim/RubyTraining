@@ -5,15 +5,15 @@ class Novel
   def initialize(filename)
     raise Errno::ENOENT unless File.exist?(filename)
 
-    @matched_text = []
     @filename = filename
-    @len = 5
   end
 
   def simple_scan(pattern)
     return unless File.exist?(@filename)
 
+    @matched_text = []
     @pattern = Regexp.new(pattern)
+    @len = 5
     scan
     output
   end
