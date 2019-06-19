@@ -1,5 +1,5 @@
 
-require './jzipcode_original'
+require './jzipcode'
 
 jzipcode = JZipCode.new('jzipcode.db')
 jzipcode.create('KEN_ALL.CSV')
