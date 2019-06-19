@@ -3,4 +3,4 @@ Layout/AlignHash:
 
 AllCops:
   Exclude:
-    - '/Users/kyoshida/Desktop/training/RubyTraining/Tool/zip/*_original.rb'
+    - '**/*_original.rb'
