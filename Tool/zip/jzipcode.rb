@@ -3,8 +3,9 @@
 require 'sqlite3'
 require 'csv'
 
+# this class will create database of Zip and enable searching.
 class JZipCode
-  CSV_COLUMN = {code: 2, pref: 6, city: 7, addr: 8}
+  CSV_COLUMN = { code: 2, pref: 6, city: 7, addr: 8 }.freeze
 
   def initialize(dbfile)
     @dbfile = dbfile
@@ -12,6 +13,7 @@ class JZipCode
 
   def create(zipfile)
     return if File.exist?(@dbfile)
+
     SQLite3::Database.open(@dbfile) do |db|
       db.execute(<<-SQL)
         CREATE TABLE IF NOT EXISTS zip_codes
@@ -20,8 +22,8 @@ class JZipCode
       db.execute('BEGIN TRANSACTION')
       CSV.open(zipfile, 'r') do |csv|
         csv.each do |rec|
-          data = Hash.new
-          CSV_COLUMN.each{|key, index| data[key] = rec[index] }
+          data = {}
+          CSV_COLUMN.each { |key, index| data[key] = rec[index] }
           data[:alladdr] = data[:pref] + data[:city] + data[:addr]
           db.execute(<<-SQL, data)
             INSERT INTO zip_codes VALUES
@@ -31,31 +33,31 @@ class JZipCode
       end
       db.execute('COMMIT TRANSACTION')
     end
-    return true
+    true
   end
 
   def find_by_code(code)
     ret = []
     SQLite3::Database.open(@dbfile) do |db|
-      db.execute(<<-SQL, code){|row| ret << row.join(" ") }
+      db.execute(<<-SQL, code) { |row| ret << row.join(' ') }
         SELECT code, alladdr
           FROM zip_codes
           WHERE code = ?
       SQL
     end
-    return ret.map{|line| line + '\n'}.join
+    ret.map { |line| line + '\n' }.join
   end
 
   def find_by_address(addr)
     ret = []
     SQLite3::Database.open(@dbfile) do |db|
       like = "%#{addr}%"
-      db.execute(<<-SQL, like){|row| ret << row.join(" ") }
+      db.execute(<<-SQL, like) { |row| ret << row.join(' ') }
         SELECT code, alladdr
           FROM zip_codes
           WHERE alladdr LIKE ?
       SQL
     end
-    return ret.map{|line| line + '\n'}.join
+    ret.map { |line| line + '\n' }.join
   end
 end
