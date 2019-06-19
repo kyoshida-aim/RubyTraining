@@ -2,6 +2,7 @@
 
 require 'sqlite3'
 require 'csv'
+require 'English'
 
 # class to call SQL commands
 class SQLCommands
@@ -66,20 +67,20 @@ class JZipCode
     true
   end
 
-  def find_by_code(code)
+  def find(sql_command:, arg:)
     ret = []
     SQLite3::Database.open(@dbfile) do |db|
-      db.execute(SQLCommands.find_by_code, code) { |row| ret << row.join(' ') }
+      db.execute(sql_command, arg) { |row| ret << row.join(' ') + $RS }
     end
-    ret.map { |line| line + '\n' }.join
+    ret
+  end
+
+  def find_by_code(code)
+    find(sql_command: SQLCommands.find_by_code, arg: code)
   end
 
   def find_by_address(addr)
-    ret = []
-    SQLite3::Database.open(@dbfile) do |db|
-      like = "%#{addr}%"
-      db.execute(SQLCommands.find_by_address, like) { |row| ret << row.join(' ') }
-    end
-    ret.map { |line| line + '\n' }.join
+    like = "%#{addr}%"
+    find(sql_command: SQLCommands.find_by_address, arg: like)
   end
 end
