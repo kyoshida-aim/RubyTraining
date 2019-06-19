@@ -4,3 +4,4 @@ Layout/AlignHash:
 AllCops:
   Exclude:
     - '**/*_original.rb'
+    - '**/test.rb'
