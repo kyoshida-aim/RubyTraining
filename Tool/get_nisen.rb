@@ -24,13 +24,12 @@ class GetNisen
       # f.write(text) # use this in Shift_JIS env
       f.write(text.encode('utf-8')) # use this in UTF-8 env
     end
-    @html = File.read(HTMLFILE)
   end
 
   def html2txt
     File.open(TEXTFILE, 'w') do |f|
       in_header = true
-      @html.each_line do |line|
+      File.open(HTMLFILE).each_line do |line|
         next if in_header && !start_of_main_text(line)
 
         in_header = false
