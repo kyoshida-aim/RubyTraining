@@ -1,4 +1,4 @@
-# frozen_string_litreal: true
+# frozen_string_literal: true
 
 hello1 = Proc.new do |name| # rubocop:disable Style/Proc
   puts "Hello, #{name}"

@@ -6,7 +6,8 @@
   (but you can pass procs into methods),
   and methods cannot return other methods
   (but they can return procs)
-=end # rubocop: enable Style/BlockComments
+=end
+# rubocop: enable Style/BlockComments
 
 def some_mtd(some_proc)
   puts 'Start of mtd'

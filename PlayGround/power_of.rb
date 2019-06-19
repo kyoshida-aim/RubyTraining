@@ -1,4 +1,4 @@
-# frozen_string_litreal: true
+# frozen_string_literal: true
 
 def power_of(num)
   lambda do |x|
