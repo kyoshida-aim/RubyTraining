@@ -54,14 +54,20 @@ class JZipCode
       db.execute(SQLCommands.create_table)
 
       db.execute('BEGIN TRANSACTION')
-      CSV.open(zipfile, 'r') do |csv|
-        csv.each do |rec|
-          db.execute(SQLCommands.write_line, line_to_data(line))
-        end
+      each_line_in_csv(zipfile) do |line|
+        db.execute(SQLCommands.write_line, line_to_data(line))
       end
       db.execute('COMMIT TRANSACTION')
     end
     true
+  end
+
+  def each_line_in_csv(zipfile)
+    CSV.open(zipfile, 'r') do |csv|
+      csv.each do |rec|
+        yield rec
+      end
+    end
   end
 
   def line_to_data(rec)
