@@ -56,15 +56,19 @@ class JZipCode
       db.execute('BEGIN TRANSACTION')
       CSV.open(zipfile, 'r') do |csv|
         csv.each do |rec|
-          data = {}
-          CSV_COLUMN.each { |key, index| data[key] = rec[index] }
-          data[:alladdr] = data[:pref] + data[:city] + data[:addr]
-          db.execute(SQLCommands.write_line, data)
+          db.execute(SQLCommands.write_line, line_to_data(line))
         end
       end
       db.execute('COMMIT TRANSACTION')
     end
     true
+  end
+
+  def line_to_data(rec)
+    data = {}
+    CSV_COLUMN.each { |key, index| data[key] = rec[index] }
+    data[:alladdr] = data[:pref] + data[:city] + data[:addr]
+    data
   end
 
   def find(sql_command:, arg:)
