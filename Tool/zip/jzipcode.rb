@@ -41,6 +41,7 @@ end
 
 # this class will create database of Zip and enable searching.
 class JZipCode
+  # index used in CSV
   CSV_COLUMN = { code: 2, pref: 6, city: 7, addr: 8 }.freeze
 
   def initialize(dbfile)
