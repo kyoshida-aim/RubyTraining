@@ -67,8 +67,7 @@ class JZipCode
   end
 
   def find_by_address(addr)
-    like = "%#{addr}%"
-    find(sql_command: SQLCommands.find_by_address, arg: like)
+    find(sql_command: SQLCommands.find_by_address, arg: "%#{addr}%")
   end
 
   private
