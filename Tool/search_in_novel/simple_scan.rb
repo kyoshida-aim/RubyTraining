@@ -2,38 +2,32 @@
 
 # this class will contain novel text for word counting
 class Novel
-  def initialize(filename, len = 5)
+  def initialize(filename)
     raise Errno::ENOENT unless File.exist?(filename)
 
     @filename = filename
-    @len = len
   end
 
   def simple_scan(pattern)
-    @matched_text = []
-    @pattern = Regexp.new(pattern)
-    scan
-    output
+    matched_text = scan(Regexp.new(pattern))
+    puts matched_text
+    puts "count: #{matched_text.size}"
   end
 
   private
 
-  def scan
-    @matched_text = []
+  def scan(pattern, len)
+    matched_text = []
     File.open(@filename).each_line do |line|
-      next unless @pattern =~ line
+      next unless pattern =~ line
 
-      line.scan(@pattern) do |s|
+      line.scan(pattern) do |s|
         pre = $`
         post = $'
-        @matched_text << "#{pre[-@len, @len]}<<#{s}>>#{post[0, @len]}"
+        matched_text << "#{pre[-len, len]}<<#{s}>>#{post[0, len]}"
       end
     end
-  end
-
-  def output
-    puts @matched_text
-    puts "count: #{@matched_text.size}"
+    matched_text
   end
 end
 
@@ -43,5 +37,5 @@ if $PROGRAM_NAME == __FILE__ && ARGV.size >= 2
   len = ARGV[2]
 
   novel = Novel.new(filename)
-  puts novel.simple_scan(pattern)
+  puts novel.simple_scan(pattern, len)
 end
