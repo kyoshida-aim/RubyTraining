@@ -82,12 +82,7 @@ class JZipCode
   def with_transaction(&block)
     SQLite3::Database.open(@dbfile) do |db|
       db.transaction do
-        begin
-          block.call(db)
-        rescue # rubocop:disable Style/RescueStandardError
-          db.execute('ROLLBACK')
-          raise
-        end
+        block.call(db)
       end
     end
   end
