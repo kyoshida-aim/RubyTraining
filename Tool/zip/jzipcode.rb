@@ -72,11 +72,7 @@ class JZipCode
   private
 
   def csv2data(zipfile)
-    all_data = []
-    CSV.read(zipfile, 'r').each do |line|
-      all_data << line_to_data(line)
-    end
-    all_data
+    CSV.read(zipfile, 'r').map { |line| line_to_data(line) }
   end
 
   def with_transaction(&block)
