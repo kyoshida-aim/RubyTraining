@@ -51,14 +51,14 @@ class JZipCode
   def create(zipfile)
     return if File.exist?(@dbfile)
 
-    SQLite3::Database.open(@dbfile) do |db|
+    with_transaction do |db|
       db.execute(SQLCommands.create_table)
 
-      db.execute('BEGIN TRANSACTION')
-      CSV.read(zipfile, 'r').each do |line|
-        db.execute(SQLCommands.write_line, line_to_data(line))
+      data_to_write = csv2data(zipfile)
+
+      data_to_write.each do |line|
+        db.execute(SQLCommands.write_line, line)
       end
-      db.execute('COMMIT TRANSACTION')
     end
   end
 
@@ -72,6 +72,22 @@ class JZipCode
   end
 
   private
+
+  def csv2data(zipfile)
+    all_data = []
+    CSV.read(zipfile, 'r').each do |line|
+      all_data << line_to_data(line)
+    end
+    all_data
+  end
+
+  def with_transaction(&block)
+    SQLite3::Database.open(@dbfile) do |db|
+      db.transaction do
+        block.call(db)
+      end
+    end
+  end
 
   def line_to_data(line_array)
     data = {}
