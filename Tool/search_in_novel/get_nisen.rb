@@ -9,16 +9,20 @@ class NisenDownloader
   HTML_FILE = 'nisendouka.html'
   TEXT_FILE = 'nisendouka.txt'
 
+  def download_text
+    download_html
+    html2txt
+  end
+
+  private
+
   def download_html
     File.open(HTMLFILE, 'wb') do |f|
       text = OpenURI.open_uri(URL, 'r:shift_jis').read
       # f.write(text) # use this in Shift_JIS env
       f.write(text.encode('utf-8')) # use this in UTF-8 env
     end
-    html2txt
   end
-
-  private
 
   def html2txt
     File.open(TEXTFILE, 'w') do |f|
@@ -49,5 +53,5 @@ end
 
 if $PROGRAM_NAME == __FILE__
   nisen = NisenDownloader.new
-  nisen.download_html
+  nisen.download_text
 end
