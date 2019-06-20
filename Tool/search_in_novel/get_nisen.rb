@@ -8,12 +8,10 @@ class GetNisen
   URL = 'https://www.aozora.gr.jp/cards/001779/files/56647_58167.html'
   HTMLFILE = 'nisendouka.html'
   TEXTFILE = 'nisendouka.txt'
-  PLAINTEXTFILE = 'nisendouka_plain.txt'
 
   def create_plain_text_file
     download_html
     html2txt
-    delete_html_tag
   end
 
   private
@@ -35,17 +33,13 @@ class GetNisen
         in_header = false
         break if end_of_main_text(line)
 
-        f.write line
+        f.write(delete_html_tag(line))
       end
     end
   end
 
-  def delete_html_tag
-    File.open(PLAINTEXTFILE, 'w') do |f|
-      File.open(TEXTFILE).each_line do |line|
-        f.write(CGI.unescapeHTML(line.gsub(/<[^>]+>/, '')))
-      end
-    end
+  def delete_html_tag(line)
+    CGI.unescapeHTML(line.gsub(/<[^>]+>/, ''))
   end
 
   def start_of_main_text(line)
