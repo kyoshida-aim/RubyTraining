@@ -2,7 +2,6 @@
 
 require 'sqlite3'
 require 'csv'
-require 'English'
 
 # class to call SQL commands
 class SQLCommands
@@ -98,7 +97,7 @@ class JZipCode
   def find(sql_command:, arg:)
     ret = []
     SQLite3::Database.open(@dbfile) do |db|
-      db.execute(sql_command, arg) { |row| ret << row.join(' ') + $RS }
+      db.execute(sql_command, arg) { |row| ret << row.join(' ') + "\n" }
     end
     ret
   end
