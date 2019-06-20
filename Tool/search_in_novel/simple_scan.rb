@@ -9,8 +9,6 @@ class Novel
   end
 
   def simple_scan(pattern)
-    return unless File.exist?(@filename)
-
     @matched_text = []
     @pattern = Regexp.new(pattern)
     @len = 5
