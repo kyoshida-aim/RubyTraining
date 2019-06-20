@@ -6,8 +6,8 @@ require 'cgi/util'
 # this class is made to handle novel 'nisendouka' from aozora.gr.jp
 class NisenDownloader
   URL = 'https://www.aozora.gr.jp/cards/001779/files/56647_58167.html'
-  HTMLFILE = 'nisendouka.html'
-  TEXTFILE = 'nisendouka.txt'
+  HTML_FILE = 'nisendouka.html'
+  TEXT_FILE = 'nisendouka.txt'
 
   def download_html
     File.open(HTMLFILE, 'wb') do |f|
