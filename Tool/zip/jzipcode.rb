@@ -62,6 +62,17 @@ class JZipCode
     end
   end
 
+  def find_by_code(code)
+    find(sql_command: SQLCommands.find_by_code, arg: code)
+  end
+
+  def find_by_address(addr)
+    like = "%#{addr}%"
+    find(sql_command: SQLCommands.find_by_address, arg: like)
+  end
+
+  private
+
   def line_to_data(line_array)
     data = {}
     CSV_COLUMN.each { |key, index| data[key] = line_array[index] }
@@ -75,14 +86,5 @@ class JZipCode
       db.execute(sql_command, arg) { |row| ret << row.join(' ') + $RS }
     end
     ret
-  end
-
-  def find_by_code(code)
-    find(sql_command: SQLCommands.find_by_code, arg: code)
-  end
-
-  def find_by_address(addr)
-    like = "%#{addr}%"
-    find(sql_command: SQLCommands.find_by_address, arg: like)
   end
 end
