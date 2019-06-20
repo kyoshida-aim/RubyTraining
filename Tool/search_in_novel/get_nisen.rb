@@ -4,17 +4,10 @@ require 'open-uri'
 require 'cgi/util'
 
 # this class is made to handle novel 'nisendouka' from aozora.gr.jp
-class GetNisen
+class NisenDownloader
   URL = 'https://www.aozora.gr.jp/cards/001779/files/56647_58167.html'
   HTMLFILE = 'nisendouka.html'
   TEXTFILE = 'nisendouka.txt'
-
-  def create_plain_text_file
-    download_html
-    html2txt
-  end
-
-  private
 
   def download_html
     File.open(HTMLFILE, 'wb') do |f|
@@ -22,7 +15,10 @@ class GetNisen
       # f.write(text) # use this in Shift_JIS env
       f.write(text.encode('utf-8')) # use this in UTF-8 env
     end
+    html2txt
   end
+
+  private
 
   def html2txt
     File.open(TEXTFILE, 'w') do |f|
@@ -52,6 +48,6 @@ class GetNisen
 end
 
 if $PROGRAM_NAME == __FILE__
-  nisen = GetNisen.new
-  nisen.create_plain_text_file
+  nisen = NisenDownloader.new
+  nisen.download_html
 end
