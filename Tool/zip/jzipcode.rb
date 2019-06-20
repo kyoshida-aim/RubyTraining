@@ -50,10 +50,10 @@ class JZipCode
   def create(zipfile)
     return if File.exist?(@dbfile)
 
+    data_to_write = csv2data(zipfile)
+
     with_transaction do |db|
       db.execute(SQLCommands.create_table)
-
-      data_to_write = csv2data(zipfile)
 
       data_to_write.each do |line|
         db.execute(SQLCommands.write_line, line)
