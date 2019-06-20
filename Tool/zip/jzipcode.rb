@@ -70,9 +70,9 @@ class JZipCode
     end
   end
 
-  def line_to_data(rec)
+  def line_to_data(line_array)
     data = {}
-    CSV_COLUMN.each { |key, index| data[key] = rec[index] }
+    CSV_COLUMN.each { |key, index| data[key] = line_array[index] }
     data[:alladdr] = data[:pref] + data[:city] + data[:addr]
     data
   end
