@@ -64,8 +64,8 @@ class JZipCode
 
   def each_line_in_csv(zipfile)
     CSV.open(zipfile, 'r') do |csv|
-      csv.each do |rec|
-        yield rec
+      csv.each do |r|
+        yield r
       end
     end
   end
